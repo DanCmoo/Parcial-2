@@ -2,16 +2,16 @@ package Servidor.model;
 
 public class PersonaVO {
     private String nombre;
-    private String contraseña;
-    public PersonaVO(String nombre, String contraseña) {
+    private String contrasena;
+    public PersonaVO(String nombre, String contrasena) {
         this.nombre = nombre;
-        this.contraseña=contraseña;
+        this.contrasena=contrasena;
     }
     public String getNombre() {
         return nombre;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 }
