@@ -4,15 +4,13 @@ import Cliente.model.conexion.Cliente;
 import Cliente.model.conexion.ConexionProperties;
 import Cliente.view.Vista;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ControlCliente implements ActionListener {
+public class ControlCliente{
     private DataInputStream entradaComunicacion;
     private DataOutputStream salida;
     private DataInputStream entradaMensaje;
@@ -79,11 +77,5 @@ public class ControlCliente implements ActionListener {
 
     public Vista getVista() {
         return vista;
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

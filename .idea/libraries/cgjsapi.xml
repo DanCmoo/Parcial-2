@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cgjsapi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/cgjsapi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

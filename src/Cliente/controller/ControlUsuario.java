@@ -5,7 +5,7 @@ import Cliente.view.InterfazUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ControlUsuario implements ActionListener {
+public class ControlUsuario extends Thread implements ActionListener {
 
     private InterfazUsuario interfazUsuario;
     private ControlCliente controlCliente;
