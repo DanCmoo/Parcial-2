@@ -2,6 +2,7 @@ package Cliente.controller;
 
 import Cliente.model.conexion.Cliente;
 import Cliente.model.conexion.ConexionProperties;
+import Cliente.view.LoginCliente;
 import Cliente.view.Vista;
 
 import java.io.DataInputStream;
@@ -20,13 +21,13 @@ public class ControlCliente{
     private int puertoMensaje;
     private String ipServidor;
     private ConexionProperties conexionProperties;
+    private LoginCliente loginCliente;
 
 
     public ControlCliente() {
+        loginCliente=new LoginCliente();
         vista = new Vista();
-        cargarDatos();
-        ipServidor = vista.pedirDatos("Direccion del servidor");
-        conexion();
+
 
     }
 
@@ -40,9 +41,15 @@ public class ControlCliente{
         try {
             conexionProperties = new ConexionProperties(vista.pedirArchivo("Archivo de propiedades del servidor", "properties"));
             conexionProperties.cargarDatosIniciales();
+            ipServidor= loginCliente.getCajaIP().toString();
             puertoComunicacion = Integer.parseInt(conexionProperties.getDatosServidor().getProperty("cliente.puertoComunicacion"));
             puertoMensaje = Integer.parseInt(conexionProperties.getDatosServidor().getProperty("cliente.puertoMensaje"));
-            vista.mostrarJOptionPane("Las propiedades han sido cargadas con exito");
+            try{
+                conexion();
+            }catch(Exception e){
+                vista.mostrarJOptionPane("error con los datos ingresados");
+            }
+            vista.mostrarJOptionPane("Los datos han sido cargados con exito");
         } catch (FileNotFoundException e) {
             vista.mostrarJOptionPane("El archivo no se ha encontrado");
         } catch (IOException e) {
@@ -58,8 +65,8 @@ public class ControlCliente{
             entradaComunicacion = new DataInputStream(cliente.getSocketComunication().getInputStream());
             salida = new DataOutputStream(cliente.getSocketComunication().getOutputStream());
             entradaMensaje = new DataInputStream(cliente.getSocketMensaje().getInputStream());
-            String usuario = vista.pedirDatos("Usuario a conectarse");
-            String contrasena = vista.pedirDatos("Contraseña");
+            String usuario =loginCliente.getCajaNombreDeUsuario().toString();
+            String contrasena = loginCliente.getCajaContrasenia().toString();
             salida.writeUTF(usuario);
             salida.writeUTF(contrasena);
             if(entradaComunicacion.readBoolean()){

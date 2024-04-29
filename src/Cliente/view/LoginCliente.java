@@ -73,4 +73,92 @@ public class LoginCliente extends JFrame {
 
         this.add(panelPrincipal);
     }
+
+    public JPanel getPanelVisual() {
+        return panelVisual;
+    }
+
+    public void setPanelVisual(JPanel panelVisual) {
+        this.panelVisual = panelVisual;
+    }
+
+    public JPanel getPanelDatos() {
+        return panelDatos;
+    }
+
+    public void setPanelDatos(JPanel panelDatos) {
+        this.panelDatos = panelDatos;
+    }
+
+    public JLabel getTextoMayor() {
+        return textoMayor;
+    }
+
+    public void setTextoMayor(JLabel textoMayor) {
+        this.textoMayor = textoMayor;
+    }
+
+    public JLabel getTextoIngresarIP() {
+        return textoIngresarIP;
+    }
+
+    public void setTextoIngresarIP(JLabel textoIngresarIP) {
+        this.textoIngresarIP = textoIngresarIP;
+    }
+
+    public JLabel getTextoIngresarNombreDeUsuario() {
+        return textoIngresarNombreDeUsuario;
+    }
+
+    public void setTextoIngresarNombreDeUsuario(JLabel textoIngresarNombreDeUsuario) {
+        this.textoIngresarNombreDeUsuario = textoIngresarNombreDeUsuario;
+    }
+
+    public JLabel getTextoIngresarContrasenia() {
+        return textoIngresarContrasenia;
+    }
+
+    public void setTextoIngresarContrasenia(JLabel textoIngresarContrasenia) {
+        this.textoIngresarContrasenia = textoIngresarContrasenia;
+    }
+
+    public JTextField getCajaIP() {
+        return cajaIP;
+    }
+
+    public void setCajaIP(JTextField cajaIP) {
+        this.cajaIP = cajaIP;
+    }
+
+    public JTextField getCajaNombreDeUsuario() {
+        return cajaNombreDeUsuario;
+    }
+
+    public void setCajaNombreDeUsuario(JTextField cajaNombreDeUsuario) {
+        this.cajaNombreDeUsuario = cajaNombreDeUsuario;
+    }
+
+    public JPasswordField getCajaContrasenia() {
+        return cajaContrasenia;
+    }
+
+    public void setCajaContrasenia(JPasswordField cajaContrasenia) {
+        this.cajaContrasenia = cajaContrasenia;
+    }
+
+    public JButton getBotonIngresarDatos() {
+        return botonIngresarDatos;
+    }
+
+    public void setBotonIngresarDatos(JButton botonIngresarDatos) {
+        this.botonIngresarDatos = botonIngresarDatos;
+    }
+
+    public JPanel getPanelPrincipal() {
+        return panelPrincipal;
+    }
+
+    public void setPanelPrincipal(JPanel panelPrincipal) {
+        this.panelPrincipal = panelPrincipal;
+    }
 }
