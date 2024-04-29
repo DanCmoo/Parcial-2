@@ -1,4 +1,8 @@
 package Cliente.view;
 
-public class InterfazUsuario {
+import javax.swing.*;
+
+public class InterfazUsuario extends JFrame {
+
+
 }
