@@ -4,6 +4,7 @@ import Cliente.view.InterfazUsuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ControlUsuario extends Thread implements ActionListener {
 
@@ -23,22 +24,33 @@ public class ControlUsuario extends Thread implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Leer")){
+        if (e.getActionCommand().equals("LEER")){
+            try{
             leerTexto();
+            }catch(IOException ex){
+                controlCliente.getVista().mostrarJOptionPane("no fue posible realizar la lectura");
+            }
         }
-        if (e.getActionCommand().equals("Salir")){
-            finalizar();
+        if (e.getActionCommand().equals("SALIR")){
+
+            try {
+                finalizar();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
-    private void finalizar() {
-        // Se ejecuta un metodo que mande un texto especifico despidiendose del usuario
+    private void finalizar() throws IOException {
+        controlCliente.escribirservidor("Hasta luego"+usuario);
+        System.exit(0);
     }
 
-    private void leerTexto() {
+    private void leerTexto() throws IOException {
         // Se trae el texto de la caja
         // Se vacía la caja
         // Se ejecuta algún metodo del Control Cliente que envie este dato al servidor
-
+        controlCliente.escribirservidor(interfazUsuario.getTextoTextoALeer().toString());
+        interfazUsuario.getTextoTextoALeer().setText("");
     }
 }

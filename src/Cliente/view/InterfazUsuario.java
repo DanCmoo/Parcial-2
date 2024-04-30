@@ -20,6 +20,78 @@ public class InterfazUsuario extends JFrame {
         this.setVisible(true);
     }
 
+    public JPanel getPanelImagen() {
+        return panelImagen;
+    }
+
+    public void setPanelImagen(JPanel panelImagen) {
+        this.panelImagen = panelImagen;
+    }
+
+    public JPanel getPanelPrincipal() {
+        return panelPrincipal;
+    }
+
+    public void setPanelPrincipal(JPanel panelPrincipal) {
+        this.panelPrincipal = panelPrincipal;
+    }
+
+    public JPanel getPanelAplicativo() {
+        return panelAplicativo;
+    }
+
+    public void setPanelAplicativo(JPanel panelAplicativo) {
+        this.panelAplicativo = panelAplicativo;
+    }
+
+    public JLabel getTextoTemporalIndicativo() {
+        return textoTemporalIndicativo;
+    }
+
+    public void setTextoTemporalIndicativo(JLabel textoTemporalIndicativo) {
+        this.textoTemporalIndicativo = textoTemporalIndicativo;
+    }
+
+    public JLabel getTextoTextoALeer() {
+        return textoTextoALeer;
+    }
+
+    public void setTextoTextoALeer(JLabel textoTextoALeer) {
+        this.textoTextoALeer = textoTextoALeer;
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
+    public JTextArea getAreaDeTexto() {
+        return areaDeTexto;
+    }
+
+    public void setAreaDeTexto(JTextArea areaDeTexto) {
+        this.areaDeTexto = areaDeTexto;
+    }
+
+    public JButton getBotonLeer() {
+        return botonLeer;
+    }
+
+    public void setBotonLeer(JButton botonLeer) {
+        this.botonLeer = botonLeer;
+    }
+
+    public JButton getBotonSalir() {
+        return botonSalir;
+    }
+
+    public void setBotonSalir(JButton botonSalir) {
+        this.botonSalir = botonSalir;
+    }
+
     public void inicializar(){
         panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BorderLayout());

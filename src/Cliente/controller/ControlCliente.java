@@ -22,12 +22,21 @@ public class ControlCliente{
     private String ipServidor;
     private ConexionProperties conexionProperties;
     private LoginCliente loginCliente;
+    private ControlInterfaz controlInterfaz;
 
+    public LoginCliente getLoginCliente() {
+        return loginCliente;
+    }
+
+    public void setLoginCliente(LoginCliente loginCliente) {
+        this.loginCliente = loginCliente;
+    }
 
     public ControlCliente() {
+
         loginCliente=new LoginCliente();
         vista = new Vista();
-
+        controlInterfaz=new ControlInterfaz(this);
 
     }
 
@@ -49,7 +58,7 @@ public class ControlCliente{
             }catch(Exception e){
                 vista.mostrarJOptionPane("error con los datos ingresados");
             }
-            vista.mostrarJOptionPane("Los datos han sido cargados con exito");
+
         } catch (FileNotFoundException e) {
             vista.mostrarJOptionPane("El archivo no se ha encontrado");
         } catch (IOException e) {
@@ -80,7 +89,10 @@ public class ControlCliente{
             vista.mostrarJOptionPane("\tEl servidor no está levantado");
         }
     }
+    public void escribirservidor(String texto) throws IOException {
+        salida.writeUTF(texto);
 
+    }
 
     public Vista getVista() {
         return vista;
