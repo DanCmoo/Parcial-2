@@ -4,53 +4,55 @@ import Cliente.view.InterfazUsuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class ControlUsuario extends Thread implements ActionListener {
 
+    private DataOutputStream salida;
     private InterfazUsuario interfazUsuario;
     private ControlCliente controlCliente;
-    private String usuario;
-    private String contrasena;
+    private String nombre;
 
-    public ControlUsuario(ControlCliente controlCliente,String usuario, String contrasena) {
+    public ControlUsuario(DataOutputStream salida,String nombre,ControlCliente controlCliente) {
         this.controlCliente = controlCliente;
-        this.usuario = usuario;
-        this.contrasena = contrasena;
+        this.salida = salida;
+        this.nombre = nombre;
         interfazUsuario = new InterfazUsuario();
+
+    }
+
+    public void run() {
 
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("LEER")){
-            try{
-            leerTexto();
-            }catch(IOException ex){
-                controlCliente.getVista().mostrarJOptionPane("no fue posible realizar la lectura");
+        if (e.getActionCommand().equals("LEER")) {
+            try {
+                leerTexto();
+            } catch (IOException ex) {
+                interfazUsuario.mostrarJOptionPane("No fue posible realizar la lectura");
             }
         }
-        if (e.getActionCommand().equals("SALIR")){
-
+        if (e.getActionCommand().equals("SALIR")) {
             try {
                 finalizar();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                ex.printStackTrace();
             }
         }
     }
 
     private void finalizar() throws IOException {
-        controlCliente.escribirservidor("Hasta luego"+usuario);
+        salida.writeInt(2);
         System.exit(0);
     }
 
     private void leerTexto() throws IOException {
-        // Se trae el texto de la caja
-        // Se vacía la caja
-        // Se ejecuta algún metodo del Control Cliente que envie este dato al servidor
-        controlCliente.escribirservidor(interfazUsuario.getTextoTextoALeer().toString());
-        interfazUsuario.getTextoTextoALeer().setText("");
+        salida.writeInt(1);
+        salida.writeUTF(interfazUsuario.getAreaDeTexto().getText());
+        interfazUsuario.getAreaDeTexto().setText("");
     }
 }

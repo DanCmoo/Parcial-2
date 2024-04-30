@@ -3,40 +3,31 @@ package Cliente.controller;
 import Cliente.model.conexion.Cliente;
 import Cliente.model.conexion.ConexionProperties;
 import Cliente.view.LoginCliente;
-import Cliente.view.Vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Arrays;
 
-public class ControlCliente{
+public class ControlCliente implements ActionListener {
     private DataInputStream entradaComunicacion;
     private DataOutputStream salida;
     private DataInputStream entradaMensaje;
-    private Vista vista;
     private Cliente cliente;
     private int puertoComunicacion;
     private int puertoMensaje;
     private String ipServidor;
     private ConexionProperties conexionProperties;
     private LoginCliente loginCliente;
-    private ControlInterfaz controlInterfaz;
-
-    public LoginCliente getLoginCliente() {
-        return loginCliente;
-    }
-
-    public void setLoginCliente(LoginCliente loginCliente) {
-        this.loginCliente = loginCliente;
-    }
 
     public ControlCliente() {
-
-        loginCliente=new LoginCliente();
-        vista = new Vista();
-        controlInterfaz=new ControlInterfaz(this);
+        loginCliente = new LoginCliente();
+        loginCliente.getBotonIngresarDatos().addActionListener(this);
+        cargarDatos();
 
     }
 
@@ -48,53 +39,60 @@ public class ControlCliente{
      */
     public void cargarDatos() {
         try {
-            conexionProperties = new ConexionProperties(vista.pedirArchivo("Archivo de propiedades del servidor", "properties"));
+            conexionProperties = new ConexionProperties(loginCliente.pedirArchivo("Archivo de propiedades del servidor", "properties"));
             conexionProperties.cargarDatosIniciales();
-            ipServidor= loginCliente.getCajaIP().toString();
             puertoComunicacion = Integer.parseInt(conexionProperties.getDatosServidor().getProperty("cliente.puertoComunicacion"));
             puertoMensaje = Integer.parseInt(conexionProperties.getDatosServidor().getProperty("cliente.puertoMensaje"));
-            try{
-                conexion();
-            }catch(Exception e){
-                vista.mostrarJOptionPane("error con los datos ingresados");
-            }
-
         } catch (FileNotFoundException e) {
-            vista.mostrarJOptionPane("El archivo no se ha encontrado");
+            loginCliente.mostrarJOptionPane("El archivo no se ha encontrado");
         } catch (IOException e) {
-            vista.mostrarJOptionPane("El archivo no se ha leído correctamente");
+            loginCliente.mostrarJOptionPane("El archivo no se ha leído correctamente");
         }
     }
 
 
-
-    public void conexion() {
+    public void conexion(String nombre,String contrasena) {
         try {
             cliente = new Cliente(new Socket(ipServidor, puertoComunicacion), new Socket(ipServidor, puertoMensaje));
             entradaComunicacion = new DataInputStream(cliente.getSocketComunication().getInputStream());
             salida = new DataOutputStream(cliente.getSocketComunication().getOutputStream());
             entradaMensaje = new DataInputStream(cliente.getSocketMensaje().getInputStream());
-            String usuario =loginCliente.getCajaNombreDeUsuario().toString();
-            String contrasena = loginCliente.getCajaContrasenia().toString();
-            salida.writeUTF(usuario);
+            salida.writeUTF(nombre);
             salida.writeUTF(contrasena);
-            if(entradaComunicacion.readBoolean()){
-                new ControlUsuario(this,usuario,contrasena);
-            }else{
-                vista.mostrarJOptionPane("El cliente no está registrado");
+            if (entradaComunicacion.readBoolean()) {
+                ControlUsuario controlUsuario = new ControlUsuario(salida,nombre,this);
+                controlUsuario.start();
+            } else {
+                loginCliente.mostrarJOptionPane("El cliente no está registrado");
             }
 
 
         } catch (IOException e) {
-            vista.mostrarJOptionPane("\tEl servidor no está levantado");
+            loginCliente.mostrarJOptionPane("\tEl servidor no está levantado");
         }
     }
-    public void escribirservidor(String texto) throws IOException {
+
+    public void escribirServidor(String texto) throws IOException {
         salida.writeUTF(texto);
 
     }
 
-    public Vista getVista() {
-        return vista;
+    public LoginCliente getLoginCliente() {
+        return loginCliente;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("INGRESAR_DATOS")){
+            String ip = loginCliente.getCajaIP().getText();
+            String nombre = loginCliente.getCajaNombreDeUsuario().getText();
+            String contrasena = Arrays.toString(loginCliente.getCajaContrasenia().getPassword());
+            if(!ip.isEmpty() && !nombre.isEmpty() && !contrasena.equals("")){
+                ipServidor = ip;
+                conexion(nombre,contrasena);
+            }else{
+                loginCliente.mostrarJOptionPane("Por favor ingrese todos los datos solicitados");
+            }
+        }
     }
 }

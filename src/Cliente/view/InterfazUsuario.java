@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class InterfazUsuario extends JFrame {
     private JPanel panelImagen, panelPrincipal, panelAplicativo;
-    private JLabel textoTemporalIndicativo, textoTextoALeer;
+    private JLabel textoTemporalIndicativo, titulo;
     private JScrollPane scrollPane;
     private JTextArea areaDeTexto;
     private JButton botonLeer,botonSalir;
@@ -52,12 +52,12 @@ public class InterfazUsuario extends JFrame {
         this.textoTemporalIndicativo = textoTemporalIndicativo;
     }
 
-    public JLabel getTextoTextoALeer() {
-        return textoTextoALeer;
+    public JLabel getTitulo() {
+        return titulo;
     }
 
-    public void setTextoTextoALeer(JLabel textoTextoALeer) {
-        this.textoTextoALeer = textoTextoALeer;
+    public void setTitulo(JLabel titulo) {
+        this.titulo = titulo;
     }
 
     public JScrollPane getScrollPane() {
@@ -116,10 +116,10 @@ public class InterfazUsuario extends JFrame {
         panelAplicativo.setBorder(BorderFactory.createTitledBorder(line, "Texto a leer"));
         panelAplicativo.setBackground(Color.WHITE);
 
-        textoTextoALeer = new JLabel("Texto:");
-        textoTextoALeer.setHorizontalAlignment(SwingConstants.CENTER);
-        textoTextoALeer.setBounds(200,30,400,40);
-        panelAplicativo.add(textoTextoALeer);
+        titulo = new JLabel("Texto:");
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        titulo.setBounds(200,30,400,40);
+        panelAplicativo.add(titulo);
 
         areaDeTexto = new JTextArea();
 
@@ -145,4 +145,8 @@ public class InterfazUsuario extends JFrame {
 
     }
 
+    public void mostrarJOptionPane(String m) {
+        JOptionPane.showMessageDialog(null,m);
+
+    }
 }
