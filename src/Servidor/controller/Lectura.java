@@ -48,7 +48,7 @@ public class Lectura {
 
     public static void main(String[] args) {
         Lectura leer = new Lectura();
-        leer.leer("Giovanni ama mucho a Lunita :3 y a CCamila");
+        leer.leer("Hola Alejandro");
     }
 }
 

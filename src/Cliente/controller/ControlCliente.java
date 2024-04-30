@@ -43,6 +43,7 @@ public class ControlCliente implements ActionListener {
             conexionProperties.cargarDatosIniciales();
             puertoComunicacion = Integer.parseInt(conexionProperties.getDatosServidor().getProperty("cliente.puertoComunicacion"));
             puertoMensaje = Integer.parseInt(conexionProperties.getDatosServidor().getProperty("cliente.puertoMensaje"));
+            loginCliente.mostrarJOptionPane("Las propiedades han sido cargadas con éxito");
         } catch (FileNotFoundException e) {
             loginCliente.mostrarJOptionPane("El archivo no se ha encontrado");
         } catch (IOException e) {

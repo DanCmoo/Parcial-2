@@ -19,6 +19,8 @@ public class ControlUsuario extends Thread implements ActionListener {
         this.salida = salida;
         this.nombre = nombre;
         interfazUsuario = new InterfazUsuario();
+        interfazUsuario.getBotonLeer().addActionListener(this);
+        interfazUsuario.getBotonSalir().addActionListener(this);
 
     }
 

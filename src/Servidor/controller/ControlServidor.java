@@ -99,7 +99,11 @@ public class ControlServidor {
     public boolean verificarNombre(String usuario,String contrasena) {
         boolean valor = false;
         try{
-            valor = personaDAO.verificarUsuario(usuario,contrasena);
+            PersonaVO persona = personaDAO.verificarUsuario(usuario,contrasena);
+            if(persona != null){
+                valor = true;
+            }
+
         }catch (SQLException e){
             e.printStackTrace();
         }

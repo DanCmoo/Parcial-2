@@ -19,34 +19,21 @@ public class PersonaDAO {
         rs = null;
     }
 
-    public void insertarUsuario(PersonaVO persona) throws SQLException {
-        String consulta = "insert into `usuarios` values(`usuario`,`contraseña`)VALUES (`" + persona.getNombre() + "`,`" + persona.getContrasena() + "`)";
-
-        con = (Connection) Conexion.getConexion();
-        ps = con.prepareStatement(consulta);
-        ps.executeUpdate();
-        ps.close();
-        Conexion.desconectar();
-
-    }
-
-    public boolean verificarUsuario(String usuario, String contrasena) throws SQLException {
-        String consulta = "SELECT * FROM `usuarios` WHERE username = '´"+usuario+"' AND password = '"+contrasena+"'";
+    public PersonaVO verificarUsuario(String usuario, String contrasena) throws SQLException {
+        String consulta = "SELECT * FROM `usuarios` WHERE username = '"+usuario+"' AND password = '"+contrasena+"'";
         boolean valor = false;
-        PersonaVO persona = new PersonaVO();
-        persona.setNombre(null);
+        PersonaVO persona = null;
         con = (Connection) Conexion.getConexion();
         ps = con.prepareStatement(consulta);
         rs = ps.executeQuery();
+
         while(rs.next()){
-            persona.setNombre(rs.getString("Usuario"));
-            persona.setContrasena(rs.getString("Contraseña"));
-        }
-        if(persona.getNombre() != null){
-            valor = true;
+            persona = new PersonaVO();
+            persona.setNombre(rs.getString("username"));
+            persona.setContrasena(rs.getString("password"));
         }
         ps.close();
         Conexion.desconectar();
-        return valor;
+        return persona;
     }
 }
