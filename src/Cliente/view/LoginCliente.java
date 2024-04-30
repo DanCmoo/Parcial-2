@@ -9,8 +9,7 @@ import java.io.IOException;
 public class LoginCliente extends JFrame {
     private JPanel panelPrincipal, panelVisual, panelDatos;
     private JLabel textoMayor, textoIngresarIP, textoIngresarNombreDeUsuario, textoIngresarContrasenia;
-    private JTextField cajaIP, cajaNombreDeUsuario;
-    private JPasswordField cajaContrasenia;
+    private JTextField cajaIP, cajaNombreDeUsuario,cajaPassword;
     private JButton botonIngresarDatos;
 
     public LoginCliente() {
@@ -63,9 +62,9 @@ public class LoginCliente extends JFrame {
         textoIngresarContrasenia.setBounds(50, 240, 300, 30);
         panelDatos.add(textoIngresarContrasenia);
 
-        cajaContrasenia = new JPasswordField();
-        cajaContrasenia.setBounds(50, 280, 300, 30);
-        panelDatos.add(cajaContrasenia);
+        cajaPassword = new JTextField();
+        cajaPassword.setBounds(50, 280, 300, 30);
+        panelDatos.add(cajaPassword);
 
         botonIngresarDatos = new JButton("INGRESAR");
         botonIngresarDatos.setBounds(100, 400, 200, 50);
@@ -75,6 +74,14 @@ public class LoginCliente extends JFrame {
         panelPrincipal.add(panelDatos, BorderLayout.EAST);
 
         this.add(panelPrincipal);
+    }
+
+    public JTextField getCajaPassword() {
+        return cajaPassword;
+    }
+
+    public void setCajaPassword(JTextField cajaPassword) {
+        this.cajaPassword = cajaPassword;
     }
 
     public JPanel getPanelVisual() {
@@ -139,14 +146,6 @@ public class LoginCliente extends JFrame {
 
     public void setCajaNombreDeUsuario(JTextField cajaNombreDeUsuario) {
         this.cajaNombreDeUsuario = cajaNombreDeUsuario;
-    }
-
-    public JPasswordField getCajaContrasenia() {
-        return cajaContrasenia;
-    }
-
-    public void setCajaContrasenia(JPasswordField cajaContrasenia) {
-        this.cajaContrasenia = cajaContrasenia;
     }
 
     public JButton getBotonIngresarDatos() {

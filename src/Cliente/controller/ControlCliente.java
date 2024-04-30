@@ -64,8 +64,9 @@ public class ControlCliente implements ActionListener {
                 controlUsuario.start();
             } else {
                 loginCliente.mostrarJOptionPane("El cliente no está registrado");
-            }
+                System.exit(0);
 
+            }
 
         } catch (IOException e) {
             loginCliente.mostrarJOptionPane("\tEl servidor no está levantado");
@@ -86,8 +87,8 @@ public class ControlCliente implements ActionListener {
         if(e.getActionCommand().equals("INGRESAR_DATOS")){
             String ip = loginCliente.getCajaIP().getText();
             String nombre = loginCliente.getCajaNombreDeUsuario().getText();
-            String contrasena = Arrays.toString(loginCliente.getCajaContrasenia().getPassword());
-            if(!ip.isEmpty() && !nombre.isEmpty() && !contrasena.equals("")){
+            String contrasena = loginCliente.getCajaPassword().getText();
+            if(!ip.isEmpty() && !nombre.isEmpty() && !contrasena.isEmpty()){
                 ipServidor = ip;
                 conexion(nombre,contrasena);
             }else{

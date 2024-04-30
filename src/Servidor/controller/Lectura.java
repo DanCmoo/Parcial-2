@@ -45,4 +45,10 @@ public class Lectura {
     public void despedirse(String nombre) {
         leer("Hasta luego" + nombre);
     }
+
+    public static void main(String[] args) {
+        Lectura leer = new Lectura();
+        leer.leer("Giovanni ama mucho a Lunita :3 y a CCamila");
+    }
 }
+

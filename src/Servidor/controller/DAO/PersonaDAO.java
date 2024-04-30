@@ -31,13 +31,22 @@ public class PersonaDAO {
     }
 
     public boolean verificarUsuario(String usuario, String contrasena) throws SQLException {
-        String consulta = "select * from `usuarios` where `usuario`='" + usuario + "' AND `contraseña`=`" + contrasena + "`";
+        String consulta = "SELECT * FROM `usuarios` WHERE username = '´"+usuario+"' AND password = '"+contrasena+"'";
+        boolean valor = false;
+        PersonaVO persona = new PersonaVO();
+        persona.setNombre(null);
         con = (Connection) Conexion.getConexion();
         ps = con.prepareStatement(consulta);
         rs = ps.executeQuery();
-        if (rs.next()) {
-            return true;
-        } else
-            return false;
+        while(rs.next()){
+            persona.setNombre(rs.getString("Usuario"));
+            persona.setContrasena(rs.getString("Contraseña"));
+        }
+        if(persona.getNombre() != null){
+            valor = true;
+        }
+        ps.close();
+        Conexion.desconectar();
+        return valor;
     }
 }
