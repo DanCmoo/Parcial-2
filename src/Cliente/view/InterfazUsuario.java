@@ -21,6 +21,7 @@ public class InterfazUsuario extends JFrame {
         this.setSize(800,700);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.getContentPane().setBackground(Color.white);
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.inicializar();
         this.setVisible(true);

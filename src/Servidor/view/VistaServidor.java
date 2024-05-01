@@ -13,6 +13,7 @@ public class VistaServidor extends JFrame{
         super(title);
         setSize(1200,800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

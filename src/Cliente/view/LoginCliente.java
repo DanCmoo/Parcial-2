@@ -23,6 +23,7 @@ public class LoginCliente extends JFrame {
         super("Login de Usuario");
         this.setSize(1000, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.inicializar();
         this.setVisible(true);
