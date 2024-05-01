@@ -15,7 +15,6 @@ public class InterfazUsuario extends JFrame {
     Color colorFondo = new Color(226,241,255);
     Font fuenteTitulo = new Font("Verdana", Font.BOLD, 20);
     Font fuenteTexto = new Font("Verdana", Font.BOLD, 13);
-    Border borde = BorderFactory.createLineBorder(Color.black, 2) ;
 
     public InterfazUsuario(){
         super("Aplicación inclusiva");
