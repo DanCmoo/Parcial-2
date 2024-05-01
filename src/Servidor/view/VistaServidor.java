@@ -21,6 +21,7 @@ public class VistaServidor extends JFrame{
         super.frameInit();
 
         cajaTexto = new JTextArea();
+        cajaTexto.setEditable(false);
 
         panelScroll = new JScrollPane(cajaTexto);
         add(panelScroll);

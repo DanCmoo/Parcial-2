@@ -2,7 +2,6 @@ package Cliente.view;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
@@ -12,13 +11,13 @@ public class LoginCliente extends JFrame {
     private JPanel panelPrincipal, panelVisual, panelDatos;
     private JLabel textoBienvenido, imagenLogin, textoMayor, textoIngresarIP, textoIngresarNombreDeUsuario, textoIngresarContrasenia, tituloPanelVisual;
     private JLabel imagenEscudo, imagenIP, imagenUsername, imagenPassword;
-    private JTextField cajaIP, cajaNombreDeUsuario,cajaPassword;
+    private JTextField cajaIP, cajaNombreDeUsuario, cajaPassword;
     private JButton botonIngresarDatos;
 
-    Color colorFondo = new Color(226,241,255);
+    Color colorFondo = new Color(226, 241, 255);
     Font fuenteTitulo = new Font("Verdana", Font.BOLD, 20);
     Font fuenteTexto = new Font("Verdana", Font.BOLD, 15);
-    Border borde = BorderFactory.createLineBorder(Color.black, 2) ;
+    Border borde = BorderFactory.createLineBorder(Color.black, 2);
 
     public LoginCliente() {
         super("Login de Usuario");
@@ -47,18 +46,18 @@ public class LoginCliente extends JFrame {
         panelVisual.add(tituloPanelVisual);
 
         imagenLogin = new JLabel();
-        imagenLogin.setBounds(100,150,400, 200);
+        imagenLogin.setBounds(100, 150, 400, 200);
         imagenLogin.setBorder(BorderFactory.createLineBorder(colorFondo, 5));
         this.setImagenLabel(imagenLogin, "imagenes\\passwordImagenLogin.png", 400, 200);
         panelVisual.add(imagenLogin);
 
         imagenEscudo = new JLabel();
-        imagenEscudo.setBounds(10,20,50,50);
-        this.setImagenLabel(imagenEscudo, "imagenes\\iconoSeguridad.png", 50,50);
+        imagenEscudo.setBounds(10, 20, 50, 50);
+        this.setImagenLabel(imagenEscudo, "imagenes\\iconoSeguridad.png", 50, 50);
         panelVisual.add(imagenEscudo);
 
         textoBienvenido = new JLabel("¡BIENVENIDO/A!");
-        textoBienvenido.setBounds(200,400,400,100);
+        textoBienvenido.setBounds(200, 400, 400, 100);
         textoBienvenido.setFont(fuenteTitulo);
         panelVisual.add(textoBienvenido);
 
@@ -82,7 +81,7 @@ public class LoginCliente extends JFrame {
         panelDatos.add(textoIngresarIP);
 
         imagenIP = new JLabel();
-        imagenIP.setBounds(50,120,35,35);
+        imagenIP.setBounds(50, 120, 35, 35);
         imagenIP.setBackground(Color.LIGHT_GRAY);
         imagenIP.setBorder(borde);
         this.setImagenLabel(imagenIP, "imagenes\\ip.png", 35, 35);
@@ -100,10 +99,10 @@ public class LoginCliente extends JFrame {
         panelDatos.add(textoIngresarNombreDeUsuario);
 
         imagenUsername = new JLabel();
-        imagenUsername.setBounds(50,200,35,35);
+        imagenUsername.setBounds(50, 200, 35, 35);
         imagenUsername.setBackground(Color.lightGray);
         imagenUsername.setBorder(borde);
-        this.setImagenLabel(imagenUsername, "imagenes\\username.png", 35,35);
+        this.setImagenLabel(imagenUsername, "imagenes\\username.png", 35, 35);
         panelDatos.add(imagenUsername);
 
         cajaNombreDeUsuario = new JTextField();
@@ -118,10 +117,10 @@ public class LoginCliente extends JFrame {
         panelDatos.add(textoIngresarContrasenia);
 
         imagenPassword = new JLabel();
-        imagenPassword.setBounds(50,280,35,35);
+        imagenPassword.setBounds(50, 280, 35, 35);
         imagenPassword.setBackground(Color.lightGray);
         imagenPassword.setBorder(borde);
-        this.setImagenLabel(imagenPassword, "imagenes\\password.png", 35,35);
+        this.setImagenLabel(imagenPassword, "imagenes\\password.png", 35, 35);
         panelDatos.add(imagenPassword);
 
         cajaPassword = new JTextField();
@@ -143,7 +142,7 @@ public class LoginCliente extends JFrame {
         this.add(panelPrincipal);
     }
 
-    public void setImagenLabel(JLabel label, String ruta, int width, int height){
+    public void setImagenLabel(JLabel label, String ruta, int width, int height) {
         ImageIcon imagen = new ImageIcon(ruta);
         Icon icono = new ImageIcon(
                 imagen.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH)
@@ -257,26 +256,13 @@ public class LoginCliente extends JFrame {
     }
 
     /**
-     * Devuelve los nombres de los autores del programa.
+     * Muestra un mensaje en un cuadro de diálogo utilizando JOptionPane.
      *
-     * @return Los nombres de los autores del programa.
+     * @param mensaje El mensaje a mostrar en el cuadro de diálogo.
      */
-    public String autores() {
-        return "Hecho por:" + "\nDaniel Esteban Camacho Ospina" + "\nGiovanni Alexander Vargas Castañeda" + "\nEdwin Alejandro Orjuela Olarte";
+    public void mostrarJOptionPane(String mensaje) {
+        // Muestra el mensaje en un cuadro de diálogo utilizando JOptionPane.
+        JOptionPane.showMessageDialog(null, mensaje);
     }
 
-    /**
-     * Abre un cuadro de diálogo para solicitar al usuario un nombre de usuario.
-     *
-     * @param texto El texto a mostrar en el cuadro de diálogo.
-     * @return El dato ingresado por el usuario.
-     */
-    public String pedirDatos(String texto) {
-        return JOptionPane.showInputDialog(null, texto);
-    }
-
-
-    public void mostrarJOptionPane(String s) {
-        JOptionPane.showMessageDialog(null, s);
-    }
 }

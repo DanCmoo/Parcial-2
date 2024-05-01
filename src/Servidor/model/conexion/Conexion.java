@@ -11,16 +11,27 @@ public class Conexion {
     private static String usuario = "root";
     private static String contrasena = "";
 
-    public static Connection getConexion() {
-        try {
-            cn = DriverManager.getConnection(URLBD, usuario, contrasena);
-        } catch (SQLException ex) {
-            System.out.println("No se puede cargar el controlador");
-        }
+    /**
+     * Obtiene una conexión a la base de datos.
+     *
+     * @return La conexión a la base de datos.
+     * @throws SQLException Sí ocurre un error al intentar establecer la conexión.
+     */
+    public static Connection getConexion() throws SQLException {
+        // Intenta establecer una conexión utilizando el controlador JDBC.
+        cn = DriverManager.getConnection(URLBD, usuario, contrasena);
+        // Devuelve la conexión establecida.
         return cn;
     }
 
+
+
+    /**
+     * Desconecta la conexión a la base de datos.
+     */
     public static void desconectar() {
+        // Establece la conexión a null para desconectarla.
         cn = null;
     }
+
 }

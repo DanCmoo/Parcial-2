@@ -168,17 +168,35 @@ public class InterfazUsuario extends JFrame {
 
     }
 
+    /**
+     * Establece una imagen en un JLabel con el tamaño especificado.
+     *
+     * @param label  El JLabel en el que se establecerá la imagen.
+     * @param ruta   La ruta de la imagen.
+     * @param width  El ancho deseado de la imagen.
+     * @param height La altura deseada de la imagen.
+     */
     public void setImagenLabel(JLabel label, String ruta, int width, int height){
+        // Crea un ImageIcon a partir de la imagen en la ruta especificada.
         ImageIcon imagen = new ImageIcon(ruta);
+        // Escala la imagen al tamaño deseado.
         Icon icono = new ImageIcon(
                 imagen.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH)
         );
+        // Establece el icono escalado en el JLabel.
         label.setIcon(icono);
+        // Actualiza el componente para reflejar los cambios.
         this.repaint();
     }
 
+    /**
+     * Muestra un mensaje en un cuadro de diálogo utilizando JOptionPane.
+     *
+     * @param m El mensaje a mostrar en el cuadro de diálogo.
+     */
     public void mostrarJOptionPane(String m) {
+        // Muestra el mensaje en un cuadro de diálogo utilizando JOptionPane.
         JOptionPane.showMessageDialog(null,m);
-
     }
+
 }

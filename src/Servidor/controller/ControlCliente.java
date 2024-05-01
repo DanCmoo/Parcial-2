@@ -56,37 +56,57 @@ public class ControlCliente extends Thread {
         }
     }
 
-    public void acciones() throws IOException{
+    /**
+     * Realiza las acciones requeridas según la opción recibida desde el cliente.
+     *
+     * @throws IOException Si ocurre un error de E/S durante la ejecución.
+     */
+    public void acciones() throws IOException {
         int opcion = 0;
-        String mensaje ,idioma= "";
+        String mensaje, idioma = "";
+
+        // Lee la opción enviada por el cliente.
         opcion = entrada.readInt();
-        switch (opcion){
+
+        // Ejecuta las acciones correspondientes según la opción recibida.
+        switch (opcion) {
             case 1:
+                // En caso de la opción 1, lee el idioma y el mensaje del cliente.
                 idioma = entrada.readUTF();
                 mensaje = entrada.readUTF();
+
+                // Muestra el mensaje recibido en la vista del servidor.
                 controlServidor.getVistaServidor().mostrarMensaje(mensaje);
-                try{
-                    lectura.leer(idioma,mensaje);
-                }catch (NullPointerException e){
-                    controlServidor.getVistaServidor().mostrarJOptionPane("No se encuentra el idioma " +idioma+ " instalado en el dispositivo");
-                }catch (Exception ex){
+
+                try {
+                    // Intenta leer el mensaje en el idioma especificado.
+                    lectura.leer(idioma, mensaje);
+                } catch (NullPointerException e) {
+                    // Maneja la excepción si el idioma especificado no está instalado en el dispositivo.
+                    controlServidor.getVistaServidor().mostrarJOptionPane("No se encuentra el idioma " + idioma + " instalado en el dispositivo");
+                } catch (Exception ex) {
+                    // Maneja cualquier otra excepción que pueda ocurrir durante la lectura.
                     ex.printStackTrace();
                 }
-
                 break;
             case 2:
+                // En caso de la opción 2, lee solo el idioma del cliente.
                 idioma = entrada.readUTF();
-                try{
-                    lectura.despedirse(idioma,usuario.getNombre());
-                }catch (NullPointerException e){
-                    controlServidor.getVistaServidor().mostrarJOptionPane("No se encuentra el idioma " +idioma+ " instalado en el dispositivo");
-                }catch (Exception ex){
+
+                try {
+                    // Intenta enviar un mensaje de despedida en el idioma especificado.
+                    lectura.despedirse(idioma, usuario.getNombre());
+                } catch (NullPointerException e) {
+                    // Maneja la excepción si el idioma especificado no está instalado en el dispositivo.
+                    controlServidor.getVistaServidor().mostrarJOptionPane("No se encuentra el idioma " + idioma + " instalado en el dispositivo");
+                } catch (Exception ex) {
+                    // Maneja cualquier otra excepción que pueda ocurrir durante el proceso de despedida.
                     ex.printStackTrace();
                 }
                 break;
         }
-
     }
+
     public Socket getSocketComunicacion() {
         return socketComunicacion;
     }
