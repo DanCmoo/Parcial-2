@@ -11,7 +11,6 @@ import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class ControlCliente implements ActionListener {
     private DataInputStream entradaComunicacion;
@@ -61,6 +60,7 @@ public class ControlCliente implements ActionListener {
             salida.writeUTF(nombre);
             salida.writeUTF(contrasena);
             if (entradaComunicacion.readBoolean()) {
+                loginCliente.dispose();
                 ControlUsuario controlUsuario = new ControlUsuario(salida,nombre,this);
                 controlUsuario.start();
             } else {
@@ -72,11 +72,6 @@ public class ControlCliente implements ActionListener {
         } catch (IOException e) {
             loginCliente.mostrarJOptionPane("\tEl servidor no está levantado");
         }
-    }
-
-    public void escribirServidor(String texto) throws IOException {
-        salida.writeUTF(texto);
-
     }
 
     public LoginCliente getLoginCliente() {

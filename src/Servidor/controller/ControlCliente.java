@@ -24,7 +24,7 @@ public class ControlCliente extends Thread {
         this.socketComunicacion = socketComunicacion;
         this.socketMensaje = socketMensaje;
         this.controlServidor.getVistaServidor().mostrarMensaje("Cliente agregado" + this);
-
+        this.lectura = new Lectura();
     }
 
     /**
@@ -58,15 +58,30 @@ public class ControlCliente extends Thread {
 
     public void acciones() throws IOException{
         int opcion = 0;
-        String mensaje = "";
+        String mensaje ,idioma= "";
         opcion = entrada.readInt();
         switch (opcion){
             case 1:
+                idioma = entrada.readUTF();
                 mensaje = entrada.readUTF();
-                lectura.leer(mensaje);
+                controlServidor.getVistaServidor().mostrarMensaje(mensaje);
+                try{
+                    lectura.leer(idioma,mensaje);
+                }catch (NullPointerException e){
+                    controlServidor.getVistaServidor().mostrarJOptionPane("No se encuentra el idioma " +idioma+ " instalado en el dispositivo");
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+
                 break;
             case 2:
-                lectura.despedirse(usuario.getNombre());
+                try{
+                    lectura.despedirse(idioma,usuario.getNombre());
+                }catch (NullPointerException e){
+                    controlServidor.getVistaServidor().mostrarJOptionPane("No se encuentra el idioma " +idioma+ " instalado en el dispositivo");
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
                 break;
         }
 

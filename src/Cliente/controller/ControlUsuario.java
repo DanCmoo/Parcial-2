@@ -53,8 +53,9 @@ public class ControlUsuario extends Thread implements ActionListener {
     }
 
     private void leerTexto() throws IOException {
-        salida.writeInt(1);
-        salida.writeUTF(interfazUsuario.getAreaDeTexto().getText());
+        String texto = interfazUsuario.getAreaDeTexto().getText();
         interfazUsuario.getAreaDeTexto().setText("");
+        salida.writeInt(1);
+        salida.writeUTF(texto);
     }
 }

@@ -12,13 +12,13 @@ public class Lectura {
     public Lectura(){
 
     }
-    public void leer(String mensaje) {
-        try {
+    public void leer(String idioma, String mensaje) throws Exception {
+
             // Configurar el motor de síntesis de voz
             System.setProperty("FreeTTSSynthEngineCentral", "com.cloudgarden.speech.CGEngineCentral");
 
             // Crear un objeto de síntesis de voz
-            EngineModeDesc desc = new EngineModeDesc(Locale.ROOT);
+            EngineModeDesc desc = new EngineModeDesc(verificarIdioma(idioma));
             Synthesizer synthesizer = Central.createSynthesizer(desc);
 
             // Configurar la voz y el idioma
@@ -26,7 +26,7 @@ public class Lectura {
             synthesizer.allocate();
             synthesizer.resume();
 
-            synthesizer.getSynthesizerProperties().setSpeakingRate(120);
+            synthesizer.getSynthesizerProperties().setSpeakingRate(130);
             synthesizer.getSynthesizerProperties().setVolume(500);
 
             // Convertir el texto a voz
@@ -37,18 +37,61 @@ public class Lectura {
 
             // Liberar recursos
             synthesizer.deallocate();
-        } catch (Exception e) {
+
+    }
+
+    public Locale verificarIdioma(String idioma){
+        switch (idioma){
+            case "Inglés":
+                return Locale.ENGLISH;
+            case "Japonés":
+                return Locale.JAPANESE;
+            case "Alemán":
+                return Locale.GERMANY;
+            case "Francés":
+                return Locale.FRENCH;
+            case "Italiano":
+                return Locale.ITALIAN;
+            case "Coreano":
+                return Locale.KOREAN;
+            case "Chino":
+                return Locale.CHINESE;
+            default:
+                return Locale.ROOT;
+        }
+
+    }
+
+    public void despedirse(String idioma, String nombre) throws Exception {
+        switch (idioma){
+            case "Inglés":
+                leer(idioma,"See you later "+ nombre);
+            case "Japonés":
+                leer(idioma,"また後で "+ nombre);
+            case "Alemán":
+                leer(idioma,"Bis später "+ nombre);
+            case "Francés":
+                leer(idioma,"À plus tard "+ nombre);
+            case "Italiano":
+                leer(idioma,"Arrivederci "+ nombre);
+            case "Coreano":
+                leer(idioma,"나중에 봐요 "+ nombre);
+            case "Chino":
+                leer(idioma,"回头见 "+ nombre);
+            default:
+                leer(idioma,"Hasta luego "+ nombre);
+        }
+
+
+    }
+
+    public static void main(String[] args){
+        Lectura lectura = new Lectura();
+        try {
+            lectura.leer("Alemán","fliege");
+        }catch (Exception e){
             e.printStackTrace();
         }
-    }
 
-    public void despedirse(String nombre) {
-        leer("Hasta luego" + nombre);
-    }
-
-    public static void main(String[] args) {
-        Lectura leer = new Lectura();
-        leer.leer("Hola Alejandro");
     }
 }
-
