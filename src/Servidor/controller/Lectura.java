@@ -9,39 +9,40 @@ import java.util.Locale;
 public class Lectura {
 
 
-    public Lectura(){
+    public Lectura() {
 
     }
+
     public void leer(String idioma, String mensaje) throws Exception {
 
-            // Configurar el motor de síntesis de voz
-            System.setProperty("FreeTTSSynthEngineCentral", "com.cloudgarden.speech.CGEngineCentral");
+        // Configurar el motor de síntesis de voz
+        System.setProperty("FreeTTSSynthEngineCentral", "com.cloudgarden.speech.CGEngineCentral");
 
-            // Crear un objeto de síntesis de voz
-            EngineModeDesc desc = new EngineModeDesc(verificarIdioma(idioma));
-            Synthesizer synthesizer = Central.createSynthesizer(desc);
+        // Crear un objeto de síntesis de voz
+        EngineModeDesc desc = new EngineModeDesc(verificarIdioma(idioma));
+        Synthesizer synthesizer = Central.createSynthesizer(desc);
 
-            // Configurar la voz y el idioma
-            SynthesizerModeDesc modeDesc = new SynthesizerModeDesc(null, "general", Locale.US, null, null);
-            synthesizer.allocate();
-            synthesizer.resume();
+        // Configurar la voz y el idioma
+        SynthesizerModeDesc modeDesc = new SynthesizerModeDesc(null, "general", Locale.US, null, null);
+        synthesizer.allocate();
+        synthesizer.resume();
 
-            synthesizer.getSynthesizerProperties().setSpeakingRate(130);
-            synthesizer.getSynthesizerProperties().setVolume(500);
+        synthesizer.getSynthesizerProperties().setSpeakingRate(130);
+        synthesizer.getSynthesizerProperties().setVolume(500);
 
-            // Convertir el texto a voz
-            synthesizer.speakPlainText(mensaje, null);
+        // Convertir el texto a voz
+        synthesizer.speakPlainText(mensaje, null);
 
-            // Esperar a que se complete la síntesis de voz
-            synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+        // Esperar a que se complete la síntesis de voz
+        synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
 
-            // Liberar recursos
-            synthesizer.deallocate();
+        // Liberar recursos
+        synthesizer.deallocate();
 
     }
 
-    public Locale verificarIdioma(String idioma){
-        switch (idioma){
+    public Locale verificarIdioma(String idioma) {
+        switch (idioma) {
             case "Inglés":
                 return Locale.ENGLISH;
             case "Japonés":
@@ -63,35 +64,32 @@ public class Lectura {
     }
 
     public void despedirse(String idioma, String nombre) throws Exception {
-        switch (idioma){
+        switch (idioma) {
             case "Inglés":
-                leer(idioma,"See you later "+ nombre);
+                leer(idioma, "See you later " + nombre);
+                break;
             case "Japonés":
-                leer(idioma,"また後で "+ nombre);
+                leer(idioma, "また後で " + nombre);
+                break;
             case "Alemán":
-                leer(idioma,"Bis später "+ nombre);
+                leer(idioma, "Bis später " + nombre);
+                break;
             case "Francés":
-                leer(idioma,"À plus tard "+ nombre);
+                leer(idioma, "À plus tard " + nombre);
+                break;
             case "Italiano":
-                leer(idioma,"Arrivederci "+ nombre);
+                leer(idioma, "Arrivederci " + nombre);
+                break;
             case "Coreano":
-                leer(idioma,"나중에 봐요 "+ nombre);
+                leer(idioma, "나중에 봐요 " + nombre);
+                break;
             case "Chino":
-                leer(idioma,"回头见 "+ nombre);
+                leer(idioma, "回头见 " + nombre);
+                break;
             default:
-                leer(idioma,"Hasta luego "+ nombre);
+                leer(idioma, "Hasta luego " + nombre);
         }
 
-
-    }
-
-    public static void main(String[] args){
-        Lectura lectura = new Lectura();
-        try {
-            lectura.leer("Alemán","fliege");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
     }
 }
