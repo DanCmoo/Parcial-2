@@ -10,6 +10,7 @@ public class InterfazUsuario extends JFrame {
     private JScrollPane scrollPane;
     private JTextArea areaDeTexto;
     private JButton botonLeer,botonSalir;
+    private JComboBox idiomas;
 
     public InterfazUsuario(){
         super("Aplicación inclusiva");
@@ -55,6 +56,8 @@ public class InterfazUsuario extends JFrame {
     public JLabel getTitulo() {
         return titulo;
     }
+
+    public JComboBox getIdiomas() {return idiomas;}
 
     public void setTitulo(JLabel titulo) {
         this.titulo = titulo;
@@ -126,8 +129,15 @@ public class InterfazUsuario extends JFrame {
         scrollPane = new JScrollPane(areaDeTexto);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(20, 80,760, 250);
+        scrollPane.setBounds(20, 80,650, 250);
         panelAplicativo.add(scrollPane);
+
+        String[] lenguajes = {"Español", "Inglés", "Japonés", "Alemán", "Francés", "Italiano", "Coreano", "Chino"};
+        idiomas = new JComboBox(lenguajes);
+        idiomas.setSelectedIndex(0);
+        idiomas.setBounds(680, 80, 100,30);
+        panelAplicativo.add(idiomas);
+
 
         botonLeer = new JButton("Leer");
         botonLeer.setBounds(150,340,200,40);

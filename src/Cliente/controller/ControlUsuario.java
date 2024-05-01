@@ -21,6 +21,7 @@ public class ControlUsuario extends Thread implements ActionListener {
         interfazUsuario = new InterfazUsuario();
         interfazUsuario.getBotonLeer().addActionListener(this);
         interfazUsuario.getBotonSalir().addActionListener(this);
+        interfazUsuario.getIdiomas().addActionListener(this);
 
     }
 
@@ -48,14 +49,18 @@ public class ControlUsuario extends Thread implements ActionListener {
     }
 
     private void finalizar() throws IOException {
+        String idioma = (String) interfazUsuario.getIdiomas().getSelectedItem();
         salida.writeInt(2);
+        salida.writeUTF(idioma);
         System.exit(0);
     }
 
     private void leerTexto() throws IOException {
         String texto = interfazUsuario.getAreaDeTexto().getText();
         interfazUsuario.getAreaDeTexto().setText("");
+        String idioma = (String) interfazUsuario.getIdiomas().getSelectedItem();
         salida.writeInt(1);
+        salida.writeUTF(idioma);
         salida.writeUTF(texto);
     }
 }

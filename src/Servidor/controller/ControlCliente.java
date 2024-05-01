@@ -75,6 +75,7 @@ public class ControlCliente extends Thread {
 
                 break;
             case 2:
+                idioma = entrada.readUTF();
                 try{
                     lectura.despedirse(idioma,usuario.getNombre());
                 }catch (NullPointerException e){
